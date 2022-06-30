@@ -6,24 +6,40 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.countriesapp.R
+import com.example.countriesapp.adapters.ViewPagerAdapter
+import com.example.countriesapp.ui.fragments.onboarding.screens.FirstScreen
+import com.example.countriesapp.ui.fragments.onboarding.screens.SecondScreen
+import com.example.countriesapp.ui.fragments.onboarding.screens.ThirdScreen
+import kotlinx.android.synthetic.main.fragment_view_pager.view.*
 
 
 class ViewPagerFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_view_pager, container, false)
+        val view =  inflater.inflate(R.layout.fragment_view_pager, container, false)
+
+        // setup viewPager adapter
+
+        val fragmentList = arrayListOf<Fragment>(
+            FirstScreen(),
+            SecondScreen(),
+            ThirdScreen()
+        )
+
+        val adapter = ViewPagerAdapter(
+            fragmentList,
+            requireActivity().supportFragmentManager,
+            lifecycle
+        )
+
+        view.viewPager.adapter = adapter
+
+        return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
+
 }

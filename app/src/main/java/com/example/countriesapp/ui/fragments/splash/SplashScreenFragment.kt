@@ -1,7 +1,10 @@
 package com.example.countriesapp.ui.fragments.splash
 
+import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,23 +24,24 @@ class SplashScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_splash_screen, container, false)
+        val view = inflater.inflate(R.layout.fragment_splash_screen, container, false)
+
+        Handler().postDelayed({
+            if (onBoardingFinished()) {
+                findNavController().navigate(R.id.action_splashScreenFragment_to_countryListFragment)
+            } else {
+                findNavController().navigate(R.id.action_splashScreenFragment_to_viewPagerFragment)
+            }
+        }, 3000)
+
+        return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        (activity as AppCompatActivity).supportActionBar?.hide()
-
-        val timer = object: CountDownTimer(3000,1000) {
-            override fun onTick(p0: Long) {
-            }
-
-            override fun onFinish() {
-                findNavController().navigate(R.id.action_splashScreenFragment_to_countryListFragment)
-            }
-        }
-        timer.start()
+    private fun onBoardingFinished(): Boolean {
+        val sharedPref = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
+        return sharedPref.getBoolean("Finished", false)
     }
 }
