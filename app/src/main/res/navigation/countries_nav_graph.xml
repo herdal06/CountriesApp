@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/countryListFragment"
         android:name="com.example.countriesapp.ui.fragments.CountryListFragment"
-        android:label="fragment_country_list"
+        android:label="All Countries"
         tools:layout="@layout/fragment_country_list" >
         <action
             android:id="@+id/action_countryListFragment_to_countryDetailsFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/countryDetailsFragment"
         android:name="com.example.countriesapp.ui.fragments.CountryDetailsFragment"
-        android:label="fragment_country_details"
+        android:label="Country Details"
         tools:layout="@layout/fragment_country_details" >
         <action
             android:id="@+id/action_countryDetailsFragment_to_countryListFragment"

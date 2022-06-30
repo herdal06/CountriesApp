@@ -10,7 +10,6 @@ import com.example.countriesapp.R
 
 class SecondFragment : Fragment() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
