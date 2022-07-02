@@ -10,9 +10,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CountryListViewModel : ViewModel() {
-    var liveDataList: MutableLiveData<List<Country>?> = MutableLiveData()
+    lateinit var liveDataList: MutableLiveData<List<Country>>
 
-    fun getLiveDataObserver(): MutableLiveData<List<Country>?> {
+    init {
+        liveDataList = MutableLiveData()
+    }
+
+    fun getLiveDataObserver(): MutableLiveData<List<Country>> {
         return liveDataList
     }
 
@@ -22,7 +26,7 @@ class CountryListViewModel : ViewModel() {
         val call = retroService.getCountryList()
         call.enqueue(object : Callback<List<Country>> {
             override fun onFailure(call: Call<List<Country>>, t: Throwable) {
-                liveDataList.postValue(null)
+
             }
 
             override fun onResponse(call: Call<List<Country>>, response: Response<List<Country>>) {

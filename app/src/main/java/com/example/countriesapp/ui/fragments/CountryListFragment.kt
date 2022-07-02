@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,33 +18,30 @@ import kotlinx.android.synthetic.main.fragment_country_list.*
 
 class CountryListFragment : Fragment() {
 
-    private lateinit var adapter: CountryAdapter
+    private val adapter = CountryAdapter()
+    private lateinit var viewModel: CountryListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setupRecyclerView()
-        setupViewModel()
-
-    }
-
-    private fun setupViewModel() {
-        val viewModel: CountryListViewModel = ViewModelProvider(this).get(CountryListViewModel::class.java)
-        viewModel.getLiveDataObserver().observe(this, Observer {
-            if(it != null) {
-                adapter.setCountryList(it)
-                adapter.notifyDataSetChanged()
-            } else {
-                Toast.makeText(requireContext(),"Error", Toast.LENGTH_LONG).show()
-            }
-        })
-        viewModel.makeAPICall()
     }
 
     private fun setupRecyclerView() {
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = CountryAdapter(requireActivity())
-        recyclerView.adapter = adapter
+        recyclerViewCountryList.layoutManager = LinearLayoutManager(context)
+        recyclerViewCountryList.adapter = adapter
+    }
+
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(this).get(CountryListViewModel::class.java)
+        viewModel.getLiveDataObserver().observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                adapter.setCountryList(it)
+                adapter.notifyDataSetChanged()
+            } else {
+                Toast.makeText(requireContext(), "Error", Toast.LENGTH_LONG).show()
+            }
+        })
+        viewModel.makeAPICall()
     }
 
     override fun onCreateView(
@@ -56,5 +54,7 @@ class CountryListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupViewModel()
+        setupRecyclerView()
     }
 }

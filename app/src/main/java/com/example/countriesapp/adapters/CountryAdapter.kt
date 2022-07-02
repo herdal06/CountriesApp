@@ -11,7 +11,7 @@ import com.example.countriesapp.databinding.ItemCountryRowBinding
 import com.example.countriesapp.models.Country
 import kotlinx.android.synthetic.main.item_country_row.view.*
 
-class CountryAdapter(private val activity: Activity) :
+class CountryAdapter() :
     RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
 
     private var countryList: List<Country>? = null
@@ -27,7 +27,7 @@ class CountryAdapter(private val activity: Activity) :
         val capital = view.textViewRecyclerRowCapitalCity
         val region = view.textViewRecyclerRowCountryRegion
 
-        fun bind(country: Country, activity: Activity) {
+        fun bind(country: Country) {
             name.text = country.name + "(" + country.alpha2Code + ")"
             capital.text = "Capital : " + country.capital
             region.text = "Region : " + country.region
@@ -42,7 +42,7 @@ class CountryAdapter(private val activity: Activity) :
     }
 
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
-        holder.bind(countryList?.get(position)!!, activity)
+        holder.bind(countryList?.get(position)!!)
     }
 
     override fun getItemCount(): Int {
