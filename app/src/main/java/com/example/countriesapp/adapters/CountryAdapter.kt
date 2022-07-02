@@ -1,42 +1,52 @@
 package com.example.countriesapp.adapters
 
+import android.app.Activity
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.countriesapp.R
 import com.example.countriesapp.databinding.ItemCountryRowBinding
 import com.example.countriesapp.models.Country
+import kotlinx.android.synthetic.main.item_country_row.view.*
 
-class CountryAdapter(private val countryList: List<Country>) :
+class CountryAdapter(private val activity: Activity) :
     RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
-    inner class CountryViewHolder(private val binding: ItemCountryRowBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(country: Country) {
-            itemView.apply {
-                Glide.with(this).load(country.flag).into(binding.imageViewRecyclerRowFlag)
-                binding.textViewRecyclerRowCountryName.text = country.name
-                binding.textViewRecyclerRowCapitalCity.text = country.capital
-                binding.textViewRecyclerRowCountryRegion.text = country.region
-            }
+
+    private var countryList: List<Country>? = null
+
+    fun setCountryList(countryList: List<Country>?) {
+        this.countryList = countryList
+    }
+
+    inner class CountryViewHolder(view: View) :
+        RecyclerView.ViewHolder(view) {
+        val flagImage = view.imageViewRecyclerRowFlag
+        val name = view.textViewRecyclerRowCountryName
+        val capital = view.textViewRecyclerRowCapitalCity
+        val region = view.textViewRecyclerRowCountryRegion
+
+        fun bind(country: Country, activity: Activity) {
+            name.text = country.name + "(" + country.alpha2Code + ")"
+            capital.text = "Capital : " + country.capital
+            region.text = "Region : " + country.region
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
         return CountryViewHolder(
-            ItemCountryRowBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_country_row, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
-        val country = countryList[position]
-        holder.bind(country)
+        holder.bind(countryList?.get(position)!!, activity)
     }
 
     override fun getItemCount(): Int {
-        return countryList.size
+        if (countryList == null) return 0
+        else return countryList?.size!!
     }
 }
