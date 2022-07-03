@@ -1,6 +1,7 @@
 package com.example.countriesapp.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Country(
     @SerializedName("name")
@@ -12,5 +13,7 @@ data class Country(
     @SerializedName("capital")
     val capital: String?,
     @SerializedName("region")
-    val region: String?
+    val region: String?,
+    @SerializedName("flags")
+    val flags: Flags?
 )
