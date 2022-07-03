@@ -4,11 +4,13 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.countriesapp.R
 import com.example.countriesapp.databinding.ItemCountryRowBinding
 import com.example.countriesapp.models.Country
+import com.example.countriesapp.ui.fragments.CountryListFragmentDirections
 import com.example.countriesapp.util.downloadImage
 import com.example.countriesapp.util.showplaceHolder
 import kotlinx.android.synthetic.main.item_country_row.view.*
@@ -46,7 +48,16 @@ class CountryAdapter() :
         holder.bind(countryList?.get(position)!!)
         holder.itemView.imageViewRecyclerRowFlag.downloadImage(
             countryList!![position].flags?.png,
-            showplaceHolder(holder.itemView.context))
+            showplaceHolder(holder.itemView.context)
+        )
+
+        holder.itemView.setOnClickListener {
+            val direction =
+                CountryListFragmentDirections.actionCountryListFragmentToCountryDetailsFragment(
+                    countryList!!.get(position)
+                )
+            it.findNavController().navigate(direction)
+        }
     }
 
     override fun getItemCount(): Int {

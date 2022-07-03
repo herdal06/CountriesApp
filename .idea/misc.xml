@@ -5,7 +5,8 @@
       <map>
         <entry key="..\:/Users/herda/AndroidStudioProjects/CountriesApp/app/src/main/res/drawable/container.xml" value="0.1" />
         <entry key="..\:/Users/herda/AndroidStudioProjects/CountriesApp/app/src/main/res/layout/activity_main.xml" value="0.19384057971014493" />
-        <entry key="..\:/Users/herda/AndroidStudioProjects/CountriesApp/app/src/main/res/layout/fragment_country_list.xml" value="0.264" />
+        <entry key="..\:/Users/herda/AndroidStudioProjects/CountriesApp/app/src/main/res/layout/fragment_country_details.xml" value="0.264" />
+        <entry key="..\:/Users/herda/AndroidStudioProjects/CountriesApp/app/src/main/res/layout/fragment_country_list.xml" value="0.2535211267605634" />
         <entry key="..\:/Users/herda/AndroidStudioProjects/CountriesApp/app/src/main/res/layout/fragment_first_screen.xml" value="0.2" />
         <entry key="..\:/Users/herda/AndroidStudioProjects/CountriesApp/app/src/main/res/layout/fragment_second_screen.xml" value="0.2" />
         <entry key="..\:/Users/herda/AndroidStudioProjects/CountriesApp/app/src/main/res/layout/fragment_splash_screen.xml" value="0.19384057971014493" />

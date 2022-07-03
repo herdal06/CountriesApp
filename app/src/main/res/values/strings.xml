@@ -4,4 +4,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="next">Next</string>
     <string name="finish">Let\'s start!</string>
+    <string name="errorMessage">An error occurred while loading data</string>
 </resources>
